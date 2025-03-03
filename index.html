@@ -3,58 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Select Movie Quality</title>
+    <title>Movie Quality Selection</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            margin-top: 50px;
+            padding: 50px;
         }
         .button {
             display: block;
             width: 200px;
-            padding: 15px;
             margin: 10px auto;
-            font-size: 18px;
-            color: white;
-            border: none;
-            cursor: pointer;
+            padding: 10px;
             text-decoration: none;
-            text-align: center;
+            color: white;
+            background-color: blue;
+            border-radius: 5px;
         }
-        .button-480p { background: #3498db; }
-        .button-720p { background: #e67e22; }
-        .button-1080p { background: #2ecc71; }
     </style>
 </head>
 <body>
-
-    <h2>🎬 Select Movie Quality</h2>
-    <p id="movie-name">Movie: </p>
-
-    <button class="button button-480p" onclick="selectQuality('480p')">480p</button>
-    <button class="button button-720p" onclick="selectQuality('720p')">720p</button>
-    <button class="button button-1080p" onclick="selectQuality('1080p')">1080p</button>
+    <h2>Select Movie Quality</h2>
+    <a id="btn480p" class="button" href="#">480p</a>
+    <a id="btn720p" class="button" href="#">720p</a>
+    <a id="btn1080p" class="button" href="#">1080p</a>
 
     <script>
-        // Extract URL parameters
-        const urlParams = new URLSearchParams(window.location.search);
-        const userId = urlParams.get("userId");
-        const movie = urlParams.get("movie");
-
-        document.getElementById("movie-name").innerText = `Movie: ${movie}`;
-
-        function selectQuality(quality) {
-            if (userId && movie && quality) {
-                fetch(`/forward-video?userId=${userId}&movie=${movie}&quality=${quality}`)
-                    .then(response => response.text())
-                    .then(data => alert(data))
-                    .catch(error => alert("Error forwarding movie!"));
-            } else {
-                alert("Invalid selection!");
-            }
+        // Function to get URL parameters
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+        
+        // Get userId and movie name from URL
+        const userId = getQueryParam("userId");
+        const movie = getQueryParam("movie");
+        
+        if (movie) {
+            document.getElementById("btn480p").href = `https://t.me/data1storage_bot?start=${movie}_480p`;
+            document.getElementById("btn720p").href = `https://t.me/data1storage_bot?start=${movie}_720p`;
+            document.getElementById("btn1080p").href = `https://t.me/data1storage_bot?start=${movie}_1080p`;
         }
     </script>
-
 </body>
 </html>
