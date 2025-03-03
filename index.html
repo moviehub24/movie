@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+<title>Image Upload and Download</title>
+</head>
+<body>
+
+<h1>Image Upload and Download</h1>
+
+<input type="file" id="imageUpload" accept="image/*" multiple>
+
+<script>
+  const imageUpload = document.getElementById('imageUpload');
+  let imageCount = 1; // Initialize image counter
+
+  imageUpload.addEventListener('change', (event) => {
+    const files = event.target.files;
+
+    if (files && files.length > 0) {
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const reader = new FileReader();
+
+        reader.onload = (e) => {
+          const base64Image = e.target.result;
+          const newFilename = `${imageCount}.jpg`; // Use counter for filename
+          imageCount++; // Increment for the next image
+
+          // Create download link immediately
+          const link = document.createElement('a');
+          link.href = base64Image;
+          link.download = newFilename;
+          link.textContent = `Download ${newFilename}`;
+          document.body.appendChild(link);
+          document.body.appendChild(document.createElement('br')); // Add line break
+
+        };
+
+        reader.readAsDataURL(file);
+      }
+    } else {
+      console.log("No files selected.");
+    }
+  });
+
+
+</script>
+
+</body>
+</html>
+
