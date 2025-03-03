@@ -6,54 +6,140 @@
     <title>Movie Quality Selection</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 50px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
         }
-        .img {
+
+        .container {
+            max-width: 500px;
+            width: 100%;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        #img {
             display: block;
             width: 100%;
-            height: auto;
+            max-height: 300px;
             object-fit: cover;
-            border-radius: 5px;
-            margin-bottom: 10px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
         .button {
-            display: block;
-            width: 200px;
-            margin: 10px auto;
-            padding: 10px;
+            display: inline-block;
+            padding: 12px 25px;
+            margin: 10px;
             text-decoration: none;
-            color: white;
-            background-color: blue;
+            color: #fff;
+            background-color: #007bff;
             border-radius: 5px;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+
+        .error-message {
+            color: #d9534f;
+            margin-top: 20px;
+        }
+
+        .loading-indicator {
+            margin-top: 20px;
+            font-style: italic;
+            color: #777;
+        }
+
+        .ad-container {
+            width: 100%;
+            margin: 20px 0;
+            text-align: center;
         }
     </style>
 </head>
 <body>
-    <img id="img" src="#" alt="Movie Poster">
-    <h2>Select Movie Quality</h2>
-    <a id="btn480p" class="button" href="#">480p</a>
-    <a id="btn720p" class="button" href="#">720p</a>
-    <a id="btn1080p" class="button" href="#">1080p</a>
+    <div class="container">
+        <img id="img" src="placeholder.jpeg" alt="Movie Poster" class="loading-indicator">
+        <h2>Select Movie Quality</h2>
+        <a id="btn480p" class="button" href="#">480p</a>
+        <a id="btn720p" class="button" href="#">720p</a>
+        <a id="btn1080p" class="button" href="#">1080p</a>
+        <p id="error-message" class="error-message" style="display: none;"></p>
+        <p id="loading-message" class="loading-indicator">Loading image...</p>
+
+        <div class="ad-container">
+            <div id="container-f8b0fc5d2d15f9c7db79f34458dee766-1"></div>
+            <script async="async" data-cfasync="false" src="//pl25102071.effectiveratecpm.com/f8b0fc5d2d15f9c7db79f34458dee766/invoke.js"></script>
+        </div>
+
+        <div class="ad-container">
+            <div id="container-f8b0fc5d2d15f9c7db79f34458dee766-2"></div>
+            <script async="async" data-cfasync="false" src="//pl25102071.effectiveratecpm.com/f8b0fc5d2d15f9c7db79f34458dee766/invoke.js"></script>
+        </div>
+
+        <div class="ad-container">
+            <div id="container-f8b0fc5d2d15f9c7db79f34458dee766-3"></div>
+            <script async="async" data-cfasync="false" src="//pl25102071.effectiveratecpm.com/f8b0fc5d2d15f9c7db79f34458dee766/invoke.js"></script>
+        </div>
+
+        <div class="ad-container">
+            <div id="container-f8b0fc5d2d15f9c7db79f34458dee766-4"></div>
+            <script async="async" data-cfasync="false" src="//pl25102071.effectiveratecpm.com/f8b0fc5d2d15f9c7db79f34458dee766/invoke.js"></script>
+        </div>
+
+        <div class="ad-container">
+            <div id="container-f8b0fc5d2d15f9c7db79f34458dee766-5"></div>
+            <script async="async" data-cfasync="false" src="//pl25102071.effectiveratecpm.com/f8b0fc5d2d15f9c7db79f34458dee766/invoke.js"></script>
+        </div>
+
+        <div class="ad-container">
+            <div id="container-f8b0fc5d2d15f9c7db79f34458dee766-6"></div>
+            <script async="async" data-cfasync="false" src="//pl25102071.effectiveratecpm.com/f8b0fc5d2d15f9c7db79f34458dee766/invoke.js"></script>
+        </div>
+    </div>
 
     <script>
-        // Function to get URL parameters
+        // ... (JavaScript code remains the same) ...
         function getQueryParam(param) {
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.get(param);
         }
-        
-        // Get userId and movie name from URL
-        const userId = getQueryParam("userId");
+
         const movie = getQueryParam("movie");
-        
+        const img = document.getElementById("img");
+        const errorMessage = document.getElementById("error-message");
+        const loadingMessage = document.getElementById("loading-message");
+
         if (movie) {
-            document.getElementById("btn480p").href = `https://t.me/data1storage_bot?start=${movie}_480p`;
-            document.getElementById("btn720p").href = `https://t.me/data1storage_bot?start=${movie}_720p`;
-            document.getElementById("btn1080p").href = `https://t.me/data1storage_bot?start=${movie}_1080p`;
-            document.getElementById("img").src = `${movie}.jpeg`;
-        }
-    </script>
-</body>
-</html>
+            document.getElementById("btn480p").href = `https://t.me/data1storage_bot?start=${encodeURIComponent(movie)}_480p`;
+            document.getElementById("btn720p").href = `https://t.me/data1storage_bot?start=${encodeURIComponent(movie)}_720p`;
+            document.getElementById("btn1080p").href = `https://t.me/data1storage_bot?start=${encodeURIComponent(movie)}_1080p`;
+
+            img.src = `${movie}.jpeg`;
+            img.onload = function() {
+                loadingMessage.style.display = "none";
+            }
+            img.onerror = function() {
+                img.src = "placeholder.jpeg";
+                img.alt = "Movie poster not found.";
+                loadingMessage.style.display = "none";
+                errorMessage.textContent
