@@ -23,6 +23,7 @@
     </style>
 </head>
 <body>
+    <img id="img" src="#" alt="Movie Poster">
     <h2>Select Movie Quality</h2>
     <a id="btn480p" class="button" href="#">480p</a>
     <a id="btn720p" class="button" href="#">720p</a>
@@ -43,6 +44,7 @@
             document.getElementById("btn480p").href = `https://t.me/data1storage_bot?start=${movie}_480p`;
             document.getElementById("btn720p").href = `https://t.me/data1storage_bot?start=${movie}_720p`;
             document.getElementById("btn1080p").href = `https://t.me/data1storage_bot?start=${movie}_1080p`;
+            document.getElementById("img").src = `${movie}.jpeg`;
         }
     </script>
 </body>
