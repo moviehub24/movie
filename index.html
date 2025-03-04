@@ -57,7 +57,6 @@
         <div class="ad-container">
             <iframe loading="lazy" src="https://moviehub24.github.io/ads/" scrolling="no" width="350px" height="300px"></iframe>
         </div>
-
     </div>
 
     <script>
@@ -79,17 +78,10 @@
             buttonContainer.style.display = 'block';
 
             const scrollDown = () => {
-                const currentScroll = window.scrollY;
-                const targetScroll = document.body.scrollHeight;
-                const scrollStep = (targetScroll - currentScroll) * 0.0001; // Tiny step
-
-                if (currentScroll < targetScroll - 1) {
-                    window.scrollTo(0, currentScroll + scrollStep);
-                    requestAnimationFrame(scrollDown);
-                }
+                window.scrollTo(0, document.body.scrollHeight);
             };
 
-            setTimeout(scrollDown, 1000); // Start scrolling after 1 second
+            setTimeout(scrollDown, 0); // Scroll immediately after load
         });
 
         let scrollTimeout;
