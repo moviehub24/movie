@@ -78,21 +78,30 @@
             loadingAnimation.style.display = 'none';
             buttonContainer.style.display = 'block';
 
-            setTimeout(() => {
-                window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-            }, 1000);
+            const scrollDown = () => {
+                const currentScroll = window.scrollY;
+                const targetScroll = document.body.scrollHeight;
+                const scrollStep = (targetScroll - currentScroll) * 0.0001; // Tiny step
+
+                if (currentScroll < targetScroll - 1) {
+                    window.scrollTo(0, currentScroll + scrollStep);
+                    requestAnimationFrame(scrollDown);
+                }
+            };
+
+            setTimeout(scrollDown, 1000); // Start scrolling after 1 second
         });
 
         let scrollTimeout;
         window.addEventListener('wheel', (e) => {
             clearTimeout(scrollTimeout);
 
-            const scrollAmount = e.deltaY * 0.05; // Decreased multiplier for slower scrolling
+            const scrollAmount = e.deltaY * 0.05;
             let currentScroll = window.scrollY;
             let targetScroll = currentScroll + scrollAmount;
 
             const smoothScroll = () => {
-                currentScroll += (targetScroll - currentScroll) * 0.00001; // Decreased multiplier for smoother scrolling
+                currentScroll += (targetScroll - currentScroll) * 0.00001;
                 window.scrollTo(0, currentScroll);
                 if (Math.abs(targetScroll - currentScroll) > 1) {
                     requestAnimationFrame(smoothScroll);
@@ -105,5 +114,4 @@
         }, { passive: false });
     </script>
 </body>
-                </html>
-                
+</html>
