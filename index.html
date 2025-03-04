@@ -5,141 +5,83 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie Quality Selection</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 500px;
-            width: 100%;
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-
-        #img {
-            display: block;
-            width: 100%;
-            max-height: 300px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        h2 {
-            color: #333;
-            margin-bottom: 20px;
-        }
-
-        .button {
-            display: inline-block;
-            padding: 12px 25px;
-            margin: 10px;
-            text-decoration: none;
-            color: #fff;
-            background-color: #007bff;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .button:hover {
-            background-color: #0056b3;
-        }
-
-        .error-message {
-            color: #d9534f;
-            margin-top: 20px;
-        }
-
-        .loading-indicator {
-            margin-top: 20px;
-            font-style: italic;
-            color: #777;
-        }
-
-        .ad-container {
-            width: 100%;
-            margin: 20px 0;
-            text-align: center;
-        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; flex-direction: column; min-height: 100vh; background-color: #f4f4f4; margin: 0; padding: 20px; overflow-y: auto; scroll-behavior: smooth; }
+        .container { max-width: 500px; width: 100%; background-color: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); text-align: center; flex-grow: 1; display: flex; flex-direction: column; justify-content: flex-start; }
+        #img { display: block; width: 100%; max-height: 300px; object-fit: cover; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }
+        h2 { color: #333; margin-bottom: 10px; }
+        .button-container { text-align: center; margin-top: 20px; display: none; }
+        .button { display: inline-block; padding: 12px 25px; margin: 10px; text-decoration: none; color: #fff; background-color: #007bff; border-radius: 5px; transition: background-color 0.3s ease; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }
+        .button:hover { background-color: #0056b3; }
+        .ad-container { width: 100%; margin: 20px 0; text-align: center; }
+        iframe { border: none; }
+        .scroll-prompt { color: #777; margin-bottom: 15px; font-style: italic; animation: bounce 1.5s infinite ease-in-out; }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+        .loading-animation { margin-top: 20px; display: flex; justify-content: center; align-items: center; flex-direction: column; }
+        .loader { width: 60px; height: 60px; border-radius: 50%; border: 6px solid #007bff; border-top-color: transparent; animation: spin 1.2s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .loading-text { color: #777; margin-top: 10px; }
     </style>
 </head>
 <body>
     <div class="container">
-        <img id="img" src="placeholder.jpeg" alt="Movie Poster" class="loading-indicator">
+        <p class="scroll-prompt">Scroll down to select quality</p>
+        <img id="img" src="placeholder.jpeg" alt="Movie Poster" loading="lazy">
         <h2>Select Movie Quality</h2>
-        <a id="btn480p" class="button" href="#">480p</a>
-        <a id="btn720p" class="button" href="#">720p</a>
-        <a id="btn1080p" class="button" href="#">1080p</a>
-        <p id="error-message" class="error-message" style="display: none;"></p>
-        <p id="loading-message" class="loading-indicator">Loading image...</p>
 
-        <div class="ad-container">
-            <div id="container-f8b0fc5d2d15f9c7db79f34458dee766-1"></div>
-            <script async="async" data-cfasync="false" src="//pl25102071.effectiveratecpm.com/f8b0fc5d2d15f9c7db79f34458dee766/invoke.js"></script>
+        <div class="loading-animation">
+            <div class="loader"></div>
+            <loading-text>Quality selection here, wait until loading</loading-text>
+        </div>
+
+        <div class="button-container">
+            <a id="btn480p" class="button" href="#">480p</a>
+            <a id="btn720p" class="button" href="#">720p</a>
+            <a id="btn1080p" class="button" href="#">1080p</a>
         </div>
 
         <div class="ad-container">
-            <div id="container-f8b0fc5d2d15f9c7db79f34458dee766-2"></div>
-            <script async="async" data-cfasync="false" src="//pl25102071.effectiveratecpm.com/f8b0fc5d2d15f9c7db79f34458dee766/invoke.js"></script>
+            <iframe loading="lazy" src="https://moviehub24.github.io/ads/" scrolling="no" width="350px" height="300px"></iframe>
+        </div>
+        <div class="ad-container">
+            <iframe loading="lazy" src="https://moviehub24.github.io/ads/" scrolling="no" width="350px" height="300px"></iframe>
+        </div>
+        <div class="ad-container">
+            <iframe loading="lazy" src="https://moviehub24.github.io/ads/" scrolling="no" width="350px" height="300px"></iframe>
+        </div>
+        <div class="ad-container">
+            <iframe loading="lazy" src="https://moviehub24.github.io/ads/" scrolling="no" width="350px" height="300px"></iframe>
+        </div>
+        <div class="ad-container">
+            <iframe loading="lazy" src="https://moviehub24.github.io/ads/" scrolling="no" width="350px" height="300px"></iframe>
+        </div>
+        <div class="ad-container">
+            <iframe loading="lazy" src="https://moviehub24.github.io/ads/" scrolling="no" width="350px" height="300px"></iframe>
         </div>
 
-        <div class="ad-container">
-            <div id="container-f8b0fc5d2d15f9c7db79f34458dee766-3"></div>
-            <script async="async" data-cfasync="false" src="//pl25102071.effectiveratecpm.com/f8b0fc5d2d15f9c7db79f34458dee766/invoke.js"></script>
-        </div>
-
-        <div class="ad-container">
-            <div id="container-f8b0fc5d2d15f9c7db79f34458dee766-4"></div>
-            <script async="async" data-cfasync="false" src="//pl25102071.effectiveratecpm.com/f8b0fc5d2d15f9c7db79f34458dee766/invoke.js"></script>
-        </div>
-
-        <div class="ad-container">
-            <div id="container-f8b0fc5d2d15f9c7db79f34458dee766-5"></div>
-            <script async="async" data-cfasync="false" src="//pl25102071.effectiveratecpm.com/f8b0fc5d2d15f9c7db79f34458dee766/invoke.js"></script>
-        </div>
-
-        <div class="ad-container">
-            <div id="container-f8b0fc5d2d15f9c7db79f34458dee766-6"></div>
-            <script async="async" data-cfasync="false" src="//pl25102071.effectiveratecpm.com/f8b0fc5d2d15f9c7db79f34458dee766/invoke.js"></script>
-        </div>
     </div>
 
     <script>
-        // ... (JavaScript code remains the same) ...
-        function getQueryParam(param) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(param);
-        }
-
+        function getQueryParam(param) { const urlParams = new URLSearchParams(window.location.search); return urlParams.get(param); }
         const movie = getQueryParam("movie");
-        const img = document.getElementById("img");
-        const errorMessage = document.getElementById("error-message");
-        const loadingMessage = document.getElementById("loading-message");
-
         if (movie) {
             document.getElementById("btn480p").href = `https://t.me/data1storage_bot?start=${encodeURIComponent(movie)}_480p`;
             document.getElementById("btn720p").href = `https://t.me/data1storage_bot?start=${encodeURIComponent(movie)}_720p`;
             document.getElementById("btn1080p").href = `https://t.me/data1storage_bot?start=${encodeURIComponent(movie)}_1080p`;
+            document.getElementById("img").src = `${movie}.jpeg`;
+            document.getElementById("img").onerror = function() { document.getElementById("img").src = "placeholder.jpeg"; }
+        }
 
-            img.src = `${movie}.jpeg`;
-            img.onload = function() {
-                loadingMessage.style.display = "none";
-            }
-            img.onerror = function() {
-                img.src = "placeholder.jpeg";
-                img.alt = "Movie poster not found.";
-                loadingMessage.style.display = "none";
-                errorMessage.textContent
+        window.addEventListener('load', () => {
+            const buttonContainer = document.querySelector('.button-container');
+            const loadingAnimation = document.querySelector('.loading-animation');
+
+            loadingAnimation.style.display = 'none';
+            buttonContainer.style.display = 'block';
+
+            setTimeout(() => {
+                window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+            }, 500);
+        });
+    </script>
+</body>
+</html>
