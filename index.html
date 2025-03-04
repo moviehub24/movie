@@ -16,10 +16,9 @@
         iframe { border: none; }
         .scroll-prompt { color: #777; margin-bottom: 15px; font-style: italic; animation: bounce 1.5s infinite ease-in-out; }
         @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
-        .loading-animation { margin-top: 20px; display: flex; justify-content: center; align-items: center; flex-direction: column; }
-        .loader { width: 60px; height: 60px; border-radius: 50%; border: 6px solid #007bff; border-top-color: transparent; animation: spin 1.2s linear infinite; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .loading-text { color: #777; margin-top: 10px; }
+        .timer-container { margin-top: 20px; text-align: center; }
+        #timer { font-size: 2em; color: #007bff; font-weight: bold; }
+        .timer-text { color: #777; margin-top: 5px; }
     </style>
 </head>
 <body>
@@ -28,9 +27,9 @@
         <img id="img" src="placeholder.jpeg" alt="Movie Poster" loading="lazy">
         <h2>Select Movie Quality</h2>
 
-        <div class="loading-animation">
-            <div class="loader"></div>
-            <loading-text>Quality selection here, wait until loading</loading-text>
+        <div class="timer-container">
+            <div id="timer">10</div>
+            <div class="timer-text">Buttons will appear in seconds...</div>
         </div>
 
         <div class="button-container">
@@ -70,19 +69,32 @@
             document.getElementById("img").onerror = function() { document.getElementById("img").src = "placeholder.jpeg"; }
         }
 
+        let pageLoaded = false;
+
         window.addEventListener('load', () => {
-            const buttonContainer = document.querySelector('.button-container');
-            const loadingAnimation = document.querySelector('.loading-animation');
-
-            loadingAnimation.style.display = 'none';
-            buttonContainer.style.display = 'block';
-
-            const scrollDown = () => {
-                window.scrollTo(0, document.body.scrollHeight);
-            };
-
-            setTimeout(scrollDown, 0); // Scroll immediately after load
+            pageLoaded = true;
+            window.scrollTo(0, document.body.scrollHeight);
         });
+
+        const buttonContainer = document.querySelector('.button-container');
+        const timerContainer = document.querySelector('.timer-container');
+        const timerDisplay = document.getElementById('timer');
+
+        let timeLeft = 10;
+
+        const countdown = setInterval(() => {
+            timerDisplay.textContent = timeLeft;
+            timeLeft--;
+
+            if (timeLeft < 0) {
+                clearInterval(countdown);
+                timerContainer.style.display = 'none';
+                buttonContainer.style.display = 'block';
+                if (!pageLoaded) {
+                    window.scrollTo(0, document.body.scrollHeight);
+                }
+            }
+        }, 1000);
 
         let scrollTimeout;
         window.addEventListener('wheel', (e) => {
