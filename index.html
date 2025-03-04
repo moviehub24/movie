@@ -34,9 +34,9 @@
         </div>
 
         <div class="button-container">
-            <a id="btn480p" class="button" href="#">480p</a>
-            <a id="btn720p" class="button" href="#">720p</a>
-            <a id="btn1080p" class="button" href="#">1080p</a>
+            <a id="btn480p" class="button" href="#" target="_blank">480p</a>
+            <a id="btn720p" class="button" href="#" target="_blank">720p</a>
+            <a id="btn1080p" class="button" href="#" target="_blank">1080p</a>
         </div>
 
         <div class="ad-container">
@@ -80,8 +80,30 @@
 
             setTimeout(() => {
                 window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-            }, 500);
+            }, 1000);
         });
+
+        let scrollTimeout;
+        window.addEventListener('wheel', (e) => {
+            clearTimeout(scrollTimeout);
+
+            const scrollAmount = e.deltaY * 0.05; // Decreased multiplier for slower scrolling
+            let currentScroll = window.scrollY;
+            let targetScroll = currentScroll + scrollAmount;
+
+            const smoothScroll = () => {
+                currentScroll += (targetScroll - currentScroll) * 0.00001; // Decreased multiplier for smoother scrolling
+                window.scrollTo(0, currentScroll);
+                if (Math.abs(targetScroll - currentScroll) > 1) {
+                    requestAnimationFrame(smoothScroll);
+                }
+            };
+
+            smoothScroll();
+
+            e.preventDefault();
+        }, { passive: false });
     </script>
 </body>
-</html>
+                </html>
+                
